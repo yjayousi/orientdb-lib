@@ -1,1 +1,11 @@
 import "reflect-metadata";
+export * from "./BaseVertex";
+export * from "./DbConfig";
+export * from "./DbConnection";
+export * from "./DbConnectionProvider";
+export * from "./DbShell";
+export * from "./decorators";
+export * from "./ExceptionType";
+export * from "./Repository";
+export * from "./RepositoryFactory";
+export * from "./types";
