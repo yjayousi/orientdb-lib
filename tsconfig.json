@@ -10,7 +10,7 @@
     "resolveJsonModule": true,
     "outDir": "./dist",
     //"jsx": "react",                         /* Specify JSX code generation: 'preserve', 'react-native', or 'react'. */
-    // "declaration": true /* Generates corresponding '.d.ts' file. */,
+    "declaration": true /* Generates corresponding '.d.ts' file. */,
     "lib": [
       "es5",
       "es6",
