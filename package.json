@@ -1,0 +1,24 @@
+{
+  "name": "orientdb-lib",
+  "version": "1.0.0",
+  "description": "Orientdb helpers",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "author": "Yaqoub Jayousi <yaqoub.jayousi@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "clean": "rimraf dist",
+    "build": "yarn clean && tsc",
+    "prepublish": "tsc"
+  },
+  "devDependencies": {
+    "rimraf": "^3.0.2"
+  },
+  "dependencies": {
+    "class-validator": "^0.12.2",
+    "graphql": "^15.3.0",
+    "orientjs": "^3.0.11",
+    "reflect-metadata": "^0.1.13",
+    "type-graphql": "^1.0.0-rc.3"
+  }
+}
