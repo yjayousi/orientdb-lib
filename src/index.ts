@@ -1,6 +1,5 @@
 import "reflect-metadata";
 export * from "./BaseVertex";
-export * from "./DbConfig";
 export * from "./DbConnection";
 export * from "./DbConnectionProvider";
 export * from "./DbShell";
