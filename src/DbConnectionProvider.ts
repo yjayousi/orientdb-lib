@@ -1,8 +1,7 @@
 import { DbConnection } from "./DbConnection";
-import { DBConfig, Logger, DBMigrations } from "./types";
-import { Service } from "typedi";
+import { DBConfig } from "./DbConfig";
+import { Logger, DBMigrations } from "./types";
 
-@Service()
 export class DbConnectionProvider {
   private connection: DbConnection;
   constructor(private dbConfig: DBConfig, private logger: Logger, private dbMigrations: DBMigrations) {}

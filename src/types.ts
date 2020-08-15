@@ -1,14 +1,4 @@
 import { ODatabaseSession } from "orientjs";
-
-export interface DBConfig {
-  host: string;
-  port: number;
-  useSSL: boolean;
-  databaseName: string;
-  userName: string;
-  userPassword: string;
-}
-
 export interface DbOperationOptions {
   session?: ODatabaseSession;
 }

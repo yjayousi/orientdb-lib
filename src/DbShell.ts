@@ -1,8 +1,7 @@
 import { DbConnectionProvider } from "./DbConnectionProvider";
 import { Logger, DbOperationOptions } from "./types";
 import { BaseVertex } from "./BaseVertex";
-import { Service } from "typedi";
-@Service()
+
 export class DBShell {
   constructor(private logger: Logger, private dbConnectionProvider: DbConnectionProvider) {}
 

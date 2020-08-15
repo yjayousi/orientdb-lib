@@ -1,5 +1,5 @@
 import { ODatabaseSession, ODatabaseSessionPool, OrientDBClient } from "orientjs";
-import { DBConfig } from "./types";
+import { DBConfig } from "./DbConfig";
 import { DbOperationOptions, Logger } from "./types";
 
 export class DbConnection {
