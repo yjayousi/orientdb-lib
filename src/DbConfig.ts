@@ -1,3 +1,6 @@
+import { injectable } from "inversify";
+
+@injectable()
 export class DBConfig {
   public host: string;
   public port: number;

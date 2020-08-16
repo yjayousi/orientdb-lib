@@ -1,9 +1,12 @@
 import { DbConnectionProvider } from "./DbConnectionProvider";
 import { Logger, DbOperationOptions } from "./types";
 import { BaseVertex } from "./BaseVertex";
+import { injectable, inject } from "inversify";
+import { Symbols } from "./Symbols";
 
+@injectable()
 export class DBShell {
-  constructor(private logger: Logger, private dbConnectionProvider: DbConnectionProvider) {}
+  constructor(@inject(Symbols.Logger) private logger: Logger, private dbConnectionProvider: DbConnectionProvider) {}
 
   public async executeQuery(q: string, options?: DbOperationOptions): Promise<any[]> {
     const connection = await this.dbConnectionProvider.getConnection();
