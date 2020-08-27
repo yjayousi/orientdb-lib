@@ -1,4 +1,5 @@
 import { ODatabaseSession } from "orientjs";
+import { DbConnection } from "./DbConnection";
 export interface DbOperationOptions {
     session?: ODatabaseSession;
 }
@@ -25,7 +26,7 @@ export interface RecordTransformer {
 }
 
 export interface DBMigrations {
-    runMigrations();
+    runMigrations(connection: DbConnection);
 }
 
 export interface DBConfig {

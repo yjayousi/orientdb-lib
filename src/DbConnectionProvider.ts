@@ -19,7 +19,7 @@ export class DbConnectionProvider {
 
         this.connection = new DbConnection(this.dbConfig, this.logger);
         await this.connection.init();
-        await this.dbMigrations.runMigrations();
+        await this.dbMigrations.runMigrations(this.connection);
         return this.connection;
     }
 }
