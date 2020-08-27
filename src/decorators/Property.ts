@@ -1,23 +1,40 @@
 const propertiesMetadataKey = Symbol("properties");
 
-export function Property(): (target: any, propertyKey: string) => void {
-    return registerProperty;
+interface PropertyOptions {
+  serializer: (propValue: any) => any;
 }
 
-function registerProperty(target: object, propertyKey: string): void {
-    let properties: string[] = Reflect.getMetadata(propertiesMetadataKey, target);
+export function Property(options?: PropertyOptions): (target: any, propertyKey: string) => void {
+  return createPropertyRegistrater(options);
+}
+
+function createPropertyRegistrater(propertyOptions: PropertyOptions) {
+  return (target: object, propertyKey: string) => {
+    let properties: object = Reflect.getMetadata(propertiesMetadataKey, target);
 
     if (properties) {
-        properties.push(propertyKey);
+      properties[propertyKey] = propertyOptions;
     } else {
-        properties = [propertyKey];
-        Reflect.defineMetadata(propertiesMetadataKey, properties, target);
+      properties = {};
+      properties[propertyKey] = propertyOptions;
+      Reflect.defineMetadata(propertiesMetadataKey, properties, target);
     }
+  };
 }
 
 export function getProperties(origin: any): object {
-    const properties: string[] = Reflect.getMetadata(propertiesMetadataKey, origin) || [];
-    const result = {};
-    properties.forEach(key => (result[key] = origin[key]));
-    return result;
+  const properties: object = Reflect.getMetadata(propertiesMetadataKey, origin) || [];
+  const result = {};
+
+  for (const propName of Object.keys(properties)) {
+    let propValue = origin[propName];
+    const propOptions: PropertyOptions = properties[propName];
+    if (propOptions) {
+      if (propOptions.serializer) {
+        propValue = propOptions.serializer(propValue);
+      }
+    }
+    result[propName] = propValue;
+  }
+  return result;
 }
