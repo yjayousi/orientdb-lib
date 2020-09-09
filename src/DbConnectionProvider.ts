@@ -17,9 +17,10 @@ export class DbConnectionProvider {
             return this.connection;
         }
 
-        this.connection = new DbConnection(this.dbConfig, this.logger);
-        await this.connection.init();
-        await this.dbMigrations.runMigrations(this.connection);
-        return this.connection;
+        const connection = new DbConnection(this.dbConfig, this.logger);
+        await connection.init();
+        await this.dbMigrations.runMigrations(connection);
+        this.connection = connection;
+        return connection;
     }
 }
