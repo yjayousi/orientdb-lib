@@ -1,7 +1,6 @@
 import { getBeforeInsertHooks } from "./decorators/BeforeInsert";
 import { getProperties } from "./decorators/Property";
 import { VERTEX_METADATA_KEY } from "./decorators/Vertex";
-import { BaseVertex } from "./BaseVertex";
 import {
     ObjectType,
     FieldSelection,
@@ -13,7 +12,7 @@ import {
 } from "./types";
 import { DbConnectionProvider } from "./DbConnectionProvider";
 
-export class Repository<T extends BaseVertex> {
+export class Repository<T> {
     public readonly vertexClassName: string;
     private vertexType: ObjectType<T>;
     private defaultExcludedFields: FieldSelection<T>;

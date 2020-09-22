@@ -1,4 +1,3 @@
-export * from "./BaseVertex";
 export * from "./DbConnection";
 export * from "./DbConnectionProvider";
 export * from "./DbShell";
