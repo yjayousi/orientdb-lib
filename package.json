@@ -1,6 +1,6 @@
 {
   "name": "orientdb-lib",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Orientdb helpers",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
