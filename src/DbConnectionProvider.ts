@@ -23,4 +23,11 @@ export class DbConnectionProvider {
         this.connection = connection;
         return connection;
     }
+
+    public async closeConnection() {
+        if (this.connection) {
+            await this.connection.close();
+            this.connection = null;
+        }
+    }
 }
