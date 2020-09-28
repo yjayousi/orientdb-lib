@@ -193,6 +193,17 @@ export class Repository<T> {
         }, options);
     }
 
+    public async deleteMany(where?: WhereCondition<T>, options?: DbOperationOptions): Promise<boolean> {
+        const dbConnection = await this.dbConnectionProvider.getConnection();
+        return dbConnection.usingSession(async (session) => {
+            let query = session.delete("VERTEX").from(this.vertexClassName)
+            if (where) {
+                query = query.where(where);
+            }
+            return query.scalar();
+        }, options);
+    }
+    
     private getRecordTransformer(projection?: FieldSelection<T>) {
         const thisRepo = this;
         const defaultExcludedFields = this.defaultExcludedFields;
