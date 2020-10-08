@@ -7,6 +7,10 @@ export interface DbOperationOptions {
 export interface DbFindOperationOptions extends DbOperationOptions {
     skip?: number;
     limit?: number;
+    let?: {
+        name: string;
+        value: string;
+    };
 }
 
 export interface Logger {

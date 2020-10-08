@@ -41,10 +41,13 @@ export class Repository<T> {
         return obj;
     }
 
-    public async count(where?: WhereCondition<T>, options?: DbOperationOptions): Promise<number> {
+    public async count(where?: WhereCondition<T>, options?: DbFindOperationOptions): Promise<number> {
         const dbConnection = await this.dbConnectionProvider.getConnection();
         return dbConnection.usingSession(async (session) => {
             let query = session.select("count(*)").from(this.vertexClassName);
+            if (options?.let) {
+                query = query.let(options.let.name, options.let.value);
+            }
             if (where) {
                 query = query.where(where);
             }
