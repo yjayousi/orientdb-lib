@@ -160,6 +160,7 @@ export class Repository<T> {
         const id = entity["@rid"];
         return dbConnection.usingSession(async (session) => {
             const props = getProperties(entity);
+            (props as any).updated_at = new Date();
             this.logger.info("update: ", props);
             return session.update(id).set(props).return("AFTER").transform(this.getRecordTransformer()).one();
         }, options);
@@ -173,6 +174,7 @@ export class Repository<T> {
         const dbConnection = await this.dbConnectionProvider.getConnection();
         const rid = entity["@rid"];
         const id = (entity as any).id || (entity as ObjectId);
+        (fieldsToUpdate as any).updated_at = new Date();
         return dbConnection.usingSession(async (session) => {
             const query = rid
                 ? session.update(rid).set(fieldsToUpdate).return("AFTER")
