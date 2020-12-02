@@ -1,5 +1,5 @@
 {
-  "name": "orientdb-lib",
+  "name": "@blipiqlabs/orientdb-lib",
   "version": "1.0.4",
   "description": "Orientdb helpers",
   "main": "dist/index.js",
