@@ -177,12 +177,13 @@ export class Repository<T> {
         (fieldsToUpdate as any).updated_at = new Date();
         return dbConnection.usingSession(async (session) => {
             const query = rid
-                ? session.update(rid).set(fieldsToUpdate).return("AFTER")
+                ? session.update(rid).set(fieldsToUpdate).return("AFTER").transform(this.getRecordTransformer())
                 : session
                       .update(this.vertexClassName)
                       .set(fieldsToUpdate)
                       .where("id=" + id)
-                      .return("AFTER");
+                      .return("AFTER")
+                      .transform(this.getRecordTransformer());
             return query.one();
         }, options);
     }
