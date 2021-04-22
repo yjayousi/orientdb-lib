@@ -81,7 +81,7 @@ export class DBShell {
         dbOpOptions?: DbOperationOptions
     ): Promise<boolean> {
         await this.executeCommand(
-            `DELETE EDGE FROM ${fromVertex["@rid"]} TO ${toVertex["@rid"]} WHERE @class = ${edge}`,
+            `DELETE EDGE FROM ${fromVertex["@rid"]} TO ${toVertex["@rid"]} WHERE @class = "${edge}"`,
             dbOpOptions
         );
         return true;
