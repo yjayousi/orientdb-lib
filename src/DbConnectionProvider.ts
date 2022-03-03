@@ -21,6 +21,7 @@ export class DbConnectionProvider {
         await connection.init();
         await this.dbMigrations.runMigrations(connection);
         this.connection = connection;
+				this.logger.info("DbConnectionProvider: opened Connection");
         return connection;
     }
 
@@ -28,6 +29,7 @@ export class DbConnectionProvider {
         if (this.connection) {
             await this.connection.close();
             this.connection = null;
+						this.logger.info("DbConnectionProvider: closed Connection");
         }
     }
 }
