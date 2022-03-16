@@ -61,7 +61,7 @@ export class DbConnection {
             host: this.dbConfig.host,
             port: this.dbConfig.port,
             pool: {
-                max: 10
+                max: 5
             }
         };
 
@@ -75,7 +75,7 @@ export class DbConnection {
             username: this.dbConfig.userName,
             password: this.dbConfig.userPassword,
             pool: {
-                max: 10
+                max: 5
             }
         });
     }
