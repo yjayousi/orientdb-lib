@@ -75,7 +75,7 @@ export class DbConnection {
             username: this.dbConfig.userName,
             password: this.dbConfig.userPassword,
             pool: {
-                max: 5
+                max: 10
             }
         });
     }
