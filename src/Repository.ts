@@ -64,7 +64,9 @@ export class Repository<T> {
         const dbConnection = await this.dbConnectionProvider.getConnection();
         return dbConnection
             .usingSession(async (session) => {
-                let query = session.select(projection).from(this.vertexClassName);
+                let query = session
+                    .select(`@this:{@class, @rid, ${projection ? projection : "*"}, !in_*, !out_*}`)
+                    .from(`${this.vertexClassName}`);
                 if (options?.let) {
                     query = query.let(options.let.name, options.let.value);
                 }
@@ -222,6 +224,10 @@ export class Repository<T> {
                 for (const key of defaultExcludedFields) {
                     delete r[key];
                 }
+            }
+            if (r && r["@this"]) {
+                const flatObj = Object.assign({}, r["@this"]);
+                r = flatObj;
             }
             return thisRepo.create(r);
         };
