@@ -7,3 +7,5 @@ export * from "./Repository";
 export * from "./RepositoryFactory";
 export * from "./Symbols";
 export * from "./types";
+export * from "./models/BaseVertex";
+export * from "./services/BaseVertexService";
