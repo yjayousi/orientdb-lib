@@ -1,7 +1,6 @@
 // tslint:disable: max-classes-per-file no-console
 
-// import { logger } from "./../../tele-api-common/dist/Logger";
-// import { runMigrations } from "./schema";
+import { logger } from "./../utils/logger";
 
 import { Container, injectable, inject } from "inversify";
 import { DBConfig, DBMigrations, Logger, RecordTransformer } from '../types';
@@ -15,20 +14,19 @@ import { OrientDBClient, ODatabaseSession } from "orientjs";
 @injectable()
 class AppLogger implements Logger {
     info(...args: any[]) {
-        console.info(...args);
+        logger.info(...args);
     }
     warn(...args: any[]) {
-        console.warn(...args);
+        logger.warn(...args);
     }
     error(...args: any[]) {
-        console.error(...args);
+        logger.error(...args);
     }
 }
 
 @injectable()
 class AppDBMigrations implements DBMigrations {
     async runMigrations(connection: DbConnection) {
-        // await runMigrations(connection);
     }
 }
 
