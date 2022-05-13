@@ -1,4 +1,4 @@
-import { DbConnectionProvider } from '../DbConnectionProvider';
+import { getOrientdbConnection } from '../models';
 import { BaseVertex } from "../models/BaseVertex";
 import { Repository } from '../Repository';
 import { DbOperationOptions } from '../types';
@@ -11,10 +11,10 @@ interface CompositeId {
 }
 
 export abstract class BaseVertexService<T extends BaseVertex> {
-    constructor(public repository: Repository<T>, private dbConnectionProvider: DbConnectionProvider) { }
+    constructor(public repository: Repository<T>) { }
 
     protected async usingTransaction(transactionName: string, func: (options: DbOperationOptions) => Promise<any>, options?: DbOperationOptions) {
-        const dbConnection = await this.dbConnectionProvider.getConnection();
+        const dbConnection = await getOrientdbConnection();
         return dbConnection.usingTransaction(transactionName, func, options);
     }
 
