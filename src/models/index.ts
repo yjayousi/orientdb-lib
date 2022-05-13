@@ -12,25 +12,25 @@ import { DBShell } from '../DbShell';
 import { RepositoryFactory } from '../RepositoryFactory';
 import { OrientDBClient, ODatabaseSession } from "orientjs";
 
-// @injectable()
-// class AppLogger implements Logger {
-//     info(...args: any[]) {
-//         logger.info(...args);
-//     }
-//     warn(...args: any[]) {
-//         logger.warn(...args);
-//     }
-//     error(...args: any[]) {
-//         logger.error(...args);
-//     }
-// }
+@injectable()
+class AppLogger implements Logger {
+    info(...args: any[]) {
+        console.info(...args);
+    }
+    warn(...args: any[]) {
+        console.warn(...args);
+    }
+    error(...args: any[]) {
+        console.error(...args);
+    }
+}
 
-// @injectable()
-// class AppDBMigrations implements DBMigrations {
-//     async runMigrations(connection: DbConnection) {
-//         await runMigrations(connection);
-//     }
-// }
+@injectable()
+class AppDBMigrations implements DBMigrations {
+    async runMigrations(connection: DbConnection) {
+        // await runMigrations(connection);
+    }
+}
 
 @injectable()
 class AppRecordTransformer implements RecordTransformer {
@@ -50,8 +50,8 @@ const dbConfig: DBConfig = {
 };
 
 export const orientdbContainer = new Container({ defaultScope: "Singleton" });
-// orientdbContainer.bind<Logger>(Symbols.Logger).to(AppLogger);
-// orientdbContainer.bind<DBMigrations>(Symbols.DBMigrations).to(AppDBMigrations);
+orientdbContainer.bind<Logger>(Symbols.Logger).to(AppLogger);
+orientdbContainer.bind<DBMigrations>(Symbols.DBMigrations).to(AppDBMigrations);
 orientdbContainer.bind<RecordTransformer>(Symbols.RecordTransformer).to(AppRecordTransformer);
 orientdbContainer.bind<DbConnectionProvider>(DbConnectionProvider).to(DbConnectionProvider);
 orientdbContainer.bind<DBShell>(DBShell).to(DBShell);
