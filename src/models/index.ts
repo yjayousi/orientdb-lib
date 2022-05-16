@@ -61,6 +61,11 @@ export const connectOrientDB = async () => {
     return dbConnectionProvider.getConnection();
 };
 
+export const closeOrientdbConnection = async () => {
+    const dbConnectionProvider = orientdbContainer.get(DbConnectionProvider);
+    return dbConnectionProvider.closeConnection();
+};
+
 /**
  * Added this function to fix the connection pooling issue in kafka consumer
  * @returns single database session

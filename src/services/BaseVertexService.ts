@@ -1,3 +1,4 @@
+import { ExceptionType } from '../ExceptionType';
 import { getOrientdbConnection } from '../models';
 import { BaseVertex } from "../models/BaseVertex";
 import { Repository } from '../Repository';
@@ -57,6 +58,18 @@ export abstract class BaseVertexService<T extends BaseVertex> {
         });
 
         return this.repository.insert(vertexDoc, options);
+    }
+
+    public async update(id: ObjectId, payload: Partial<T>, options?: DbOperationOptions): Promise<T> {
+        try {
+            const v = await this.repository.updateFields(id, payload, options);
+            return v;
+        } catch (e) {
+            if (e.type === ExceptionType.RecordDuplicated) {
+                throw new AppError(AppCode.VertexAlreadyExists, this.repository.vertexClassName);
+            }
+            throw e;
+        }
     }
 
     public async deleteById(compId: CompositeId): Promise<boolean> {

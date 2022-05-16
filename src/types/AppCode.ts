@@ -1,11 +1,14 @@
 export enum AppCode {
-    VertexNotFound = "VertexNotFound"
+    VertexNotFound = "VertexNotFound",
+    VertexAlreadyExists= "VertexAlreadyExists"
 }
 
 export function getAppCodeMessage(appCode: AppCode, arg1?): string {
     switch (appCode) {
         case AppCode.VertexNotFound:
             return `Vertex ${arg1} not found`;
+        case AppCode.VertexAlreadyExists:
+            return `Vertex ${arg1} already exists`
         default:
             neverReached(appCode);
     }
